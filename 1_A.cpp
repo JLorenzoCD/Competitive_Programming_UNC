@@ -20,9 +20,6 @@ unsigned int division_with_rounding_up(unsigned int x, unsigned int y){
 int main() {
     ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-
-// La entrada contiene tres números enteros positivos en la primera línea: n,  m y a (1 ≤  n, m, a ≤ 10**9).
-
     unsigned int n = 0;
     unsigned int m = 0;
     unsigned int a = 0;
