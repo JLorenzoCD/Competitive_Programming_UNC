@@ -11,8 +11,8 @@ using namespace std;
 #define MAX_VALUE pow(10, 9)
 #define MIN_VALUE 1
 
-unsigned long int division_with_rounding_up(unsigned long int x, unsigned long int y){
-    unsigned int module_y = x % y;
+long long division_with_rounding_up(long long x, long long y) {
+    long long module_y = x % y;
 
     return x / y + (module_y != 0 ? 1 : 0);
 }
@@ -20,29 +20,18 @@ unsigned long int division_with_rounding_up(unsigned long int x, unsigned long i
 int main() {
     ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 
-    unsigned long int n = 0;
-    unsigned long int m = 0;
-    unsigned long int a = 0;
+    long long n = 0;
+    long long m = 0;
+    long long a = 0;
 
-    int try_scanf = scanf("%lu %lu %lu", &n, &m, &a);
-    if(try_scanf != 3){
-        printf("Error reading measurements\n");
-        exit(EXIT_FAILURE);
-    }
+    cin >> n >> m >> a;
 
-    if(
-           (MAX_VALUE < n || n < MIN_VALUE)
-        || (MAX_VALUE < m || m < MIN_VALUE)
-        || (MAX_VALUE < a || a < MIN_VALUE)
-    ){
-        printf("The number of problems must be in the range 1 ≤ n, m, a ≤ 10^9\n");
-        exit(EXIT_FAILURE);
-    }
+    long long flagstone_x = division_with_rounding_up(n, a);
+    long long flagstone_y = division_with_rounding_up(m, a);
 
-    unsigned long int flagstone_x = division_with_rounding_up(n, a);
-    unsigned long int flagstone_y = division_with_rounding_up(m, a);
+    long long number_of_flagstones = flagstone_x * flagstone_y;
 
-    printf("%lu\n", flagstone_x * flagstone_y);
+    cout << number_of_flagstones << endl;
 
     return EXIT_SUCCESS;
 }
