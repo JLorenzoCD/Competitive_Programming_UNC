@@ -58,26 +58,11 @@ int main(void) {
 }
 
 unsigned int count_X(string s) {
-    unsigned int count = 0u;
+    unsigned int len = s.size();
 
-    for (unsigned int i = 0; i < s.size(); i++)
-        if (s[i] == 'X') count++;
-
-    return count;
+    return len != 0u ? len - 1u : 0u;
 }
 
 string get_size(string s) {
-    string size_shirt;
-
-    if (s.find("S") != string::npos) {
-        size_shirt = "S";
-    }
-    else if (s.find("M") != string::npos) {
-        size_shirt = "M";
-    }
-    else if (s.find("L") != string::npos) {
-        size_shirt = "L";
-    }
-
-    return size_shirt;
+    return string(1, s.back());
 }
