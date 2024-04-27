@@ -7,6 +7,7 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 
+
 int main(void) {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
@@ -14,31 +15,29 @@ int main(void) {
     cin >> n >> m;
 
     vector<ull> h(n);
-    for (ull&e : h) { // O( n )
-        cin >> e;
+    set<pair<ull, ull>> st;
+    for (ull i = 0; i < n; i++) {
+        cin >> h[i];
+        st.insert({ h[i], i });
     }
+
     vector<ull> t(m);
-    for (ull&e : t) { // O( m )
+    for (ull&e : t) {
         cin >> e;
     }
 
-    sort(h.begin(), h.end()); // O( n*Log(n) )
+    sort(h.begin(), h.end());
 
-    ull index_max;
-    for (ull i = 0; i < m; i++) { // O( m )
-        index_max = lower_bound(h.begin(), h.end(), t[i]) - h.begin(); // O( Log(n) ) => O( m*Log(n) )
+    for (ull i = 0; i < m; i++) {
+        auto match = st.lower_bound({ t[i] + 1u, 0 });
 
-
-        if (t[i] == h[index_max]) {
-            cout << h[index_max] << endl;
-            h.erase(h.begin() + index_max);
-        }
-        else if (index_max == 0u) {
+        if (match == st.begin()) {
             cout << -1 << endl;
         }
         else {
-            cout << h[index_max - 1u] << endl;
-            h.erase(h.begin() + index_max - 1u);
+            --match;
+            cout << match->first << endl;
+            st.erase(match);
         }
     }
 
