@@ -8,6 +8,8 @@ typedef long long ll;
 typedef unsigned long long ull;
 
 void f(vector<array< uint, 3u>> *v, vector<array< uint, 3u>> *dp, uint n, uint i, uint act) {
+    if ((*dp)[i][act] != 0u) return;
+
     if (i + 1u == n) {
         (*dp)[i][act] = (*v)[i][act];
     }
