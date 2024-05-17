@@ -38,5 +38,18 @@ int main(void) {
 
     cout << f(N, dp) << endl;
 
+
+    /* // Regulación matemática(Mucho mas optimo ya que no se utiliza recursion o bucles) :
+    uint ans;
+    if (N % 2 == 1u) {
+        ans = 0u;
+    }
+    else {
+        ans = 1 << (N / 2); // Seria pow(2, (N / 2))
+    }
+    cout << ans << endl;
+    */
+
+
     return EXIT_SUCCESS;
 }
