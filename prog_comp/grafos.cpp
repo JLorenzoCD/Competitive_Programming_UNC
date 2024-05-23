@@ -46,6 +46,7 @@ int main(void) {
     ll n, m;
     cin >> n >> m;
     vector<vector<ll>> g(n);
+    vector<bool> vis(m, false);
 
     for (ll i = 0; i < m; i++) {
         ll u, v;
@@ -57,8 +58,9 @@ int main(void) {
         g[v].push_back(u);
     }
 
-    // Llamar a bfs
+    // Llamar a bfs o dfs
     bfs(0u, g);
+    dfs(0u, g, vis);
 
     return EXIT_SUCCESS;
 }
