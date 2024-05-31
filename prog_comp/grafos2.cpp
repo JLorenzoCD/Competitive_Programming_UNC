@@ -8,12 +8,13 @@ typedef long double ld;
 
 typedef unsigned int uint;
 
-uint mini_dist(vector<uint> &path, vector<bool> &vis) {
-    uint minimum = INT_MAX, ind;
+uint mini_dist(vector<uint> &distance, vector<bool> &vis, uint v_start) {
+    uint minimum = numeric_limits<uint>::max();
+    uint ind = v_start;
 
     for (uint i = 0; i < vis.size(); i++) {
-        if (!vis[i] && path[i] <= minimum) {
-            minimum = path[i];
+        if (!vis[i] && distance[i] < minimum) {
+            minimum = distance[i];
             ind = i;
         }
     }
@@ -24,18 +25,22 @@ uint mini_dist(vector<uint> &path, vector<bool> &vis) {
 vector<uint> dijkstra(uint v_start, vector<vector<uint>> &graph, vector<bool> &vis) {
     uint N = graph.size();
 
-    vector<uint> distance(N, INT_MAX);
+    vector<uint> distance(N, numeric_limits<uint>::max());
 
     // Actualizando distancia a si mismo a 0
     distance[v_start] = 0;
 
     for (uint i = 0; i < N; i++) {
-        uint m = mini_dist(distance, vis);
-        vis[m] = true;
+        uint m = mini_dist(distance, vis, v_start);
 
+        if (vis[m] && m == v_start) {
+            continue;
+        }
+
+        vis[m] = true;
         for (uint j = 0; j < N; j++) {
             // Actualizando la distancia de los vortices cercanos
-            if (!vis[j] && graph[m][j] && distance[m] != INT_MAX && distance[m] + graph[m][j] < distance[j]) {
+            if (!vis[j] && graph[m][j] != numeric_limits<uint>::max() && distance[m] != numeric_limits<uint>::max() && distance[m] + graph[m][j] < distance[j]) {
                 distance[j] = distance[m] + graph[m][j];
             }
         }
